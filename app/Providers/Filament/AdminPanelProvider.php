@@ -5,6 +5,7 @@ namespace App\Providers\Filament;
 use App\Filament\Pages\Auth\Login;
 use App\Filament\Pages\Dashboard;
 use App\Http\Middleware\Authenticate;
+use Filament\Auth\Pages\EditProfile;
 use Filament\Http\Middleware\DisableBladeIconComponents;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
 use Filament\Panel;
@@ -29,6 +30,9 @@ class AdminPanelProvider extends PanelProvider
             ->default()
             ->id('admin')
             ->login(Login::class)
+            ->profile(isSimple: false)
+            ->passwordReset()
+            ->spa(hasPrefetching: true)
             ->discoverClusters(in: app_path('Filament/Clusters'), for: 'App\\Filament\\Clusters')
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\\Filament\\Resources')
             ->discoverPages(in: app_path('Filament/Pages'), for: 'App\\Filament\\Pages')
